@@ -17,16 +17,6 @@ export type dataType = {
   articles: articleType[];
   totalResults: number;
 };
-export type trendingType = {
-  image: string;
-  title: string;
-  publisher: string;
-  author: string;
-  description: string;
-  publishedAt: string;
-  url: string;
-  urlToImage: string;
-} & { source: sourceType };
 export type CardPropsType = {
   url: string;
   image: string;
@@ -50,7 +40,7 @@ export type wrapperProps = {
   children: React.ReactNode;
   styles: string;
 };
-export type initialsStateType = {
+export type initialStateType = {
   category: string;
   filter: string;
   publisher: string;

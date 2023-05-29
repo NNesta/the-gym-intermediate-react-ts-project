@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { newsApi } from "./features/apiSlice";
 import NewsReducer from "./features/newsSlice";
-import React from "react";
 
 const store = configureStore({
   reducer: {

@@ -24,6 +24,9 @@ export const newsApi = createApi({
     getAllTrendingNews: builder.query({
       query: (category) =>
         `top-headlines?q=${category}&to=${today.toISOString()}&sortBy=publishedAt&apiKey=${KEY}`,
+      transformResponse: (response: dataType) => {
+        return response;
+      },
     }),
     getAllPublishers: builder.query({
       query: () => `top-headlines/sources?apiKey=${KEY}`,

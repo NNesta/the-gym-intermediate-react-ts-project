@@ -3,7 +3,7 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { useGetAllTrendingNewsQuery } from "../../features/apiSlice";
 import Loading from "../ui/Loading";
 import TrendingCard from "../ui/TrendingCard";
-import { trendingType, stateType } from "../../Type";
+import { stateType, articleType } from "../../Type";
 
 const TrendingSection = () => {
   const { category, filter } = useSelector((state: stateType) => state.news);
@@ -12,9 +12,8 @@ const TrendingSection = () => {
     isLoading,
     isFetching,
   } = useGetAllTrendingNewsQuery(category);
-  const data = response?.articles;
-  console.log({ response });
-  const viewNews = !isLoading ? data.slice(0, 8) : [];
+  const data = response?.articles ? response?.articles : ([] as articleType[]);
+  const viewNews = data.slice(0, 8);
   return (
     <div>
       {viewNews.length ? (
@@ -28,10 +27,10 @@ const TrendingSection = () => {
               <Loading />
             ) : (
               viewNews
-                .filter((item: trendingType) =>
+                .filter((item: articleType) =>
                   item.title.toLowerCase().includes(filter.toLowerCase())
                 )
-                .map((item: trendingType, index: number) => (
+                .map((item: articleType, index: number) => (
                   <TrendingCard
                     key={index}
                     url={item.url}

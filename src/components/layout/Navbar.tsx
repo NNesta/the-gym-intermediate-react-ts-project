@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setShowPublishers } from "../../features/newsSlice";
-import { filterNews } from "../../features/newsSlice";
+import { setShowPublishers, filterNews } from "../../features/newsSlice";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
@@ -10,8 +9,9 @@ import { stateType } from "../../Type";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { filter } = useSelector((state: stateType) => state.news);
-  const { showPublishers } = useSelector((state: stateType) => state.news);
+  const { filter, showPublishers } = useSelector(
+    (state: stateType) => state.news
+  );
   const handleMenuClick = () => {
     dispatch(setShowPublishers());
   };
@@ -34,7 +34,7 @@ const Navbar = () => {
             className="text-2xl flex items-center gap-4 font-bold text-blue-500"
           >
             <button onClick={handleMenuClick}>
-              {showPublishers ? <AiOutlineClose /> : <FiMenu className="" />}
+              {showPublishers ? <AiOutlineClose /> : <FiMenu />}
             </button>
             <span className="hidden md:block">THE NEWS</span>
           </Link>

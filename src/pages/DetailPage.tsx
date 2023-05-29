@@ -8,27 +8,25 @@ import {
   useGetAllTrendingNewsQuery,
 } from "../features/apiSlice";
 import Footer from "../components/layout/Footer";
-import { stateType } from "../Type";
-import { articleType } from "../Type";
+import { stateType, articleType } from "../Type";
 
 const DetailPage = () => {
   const params = useParams();
-  const title = params?.title ? params.title : "";
+  const title = params.title ? params.title : "";
   const { category, publisher } = useSelector((state: stateType) => state.news);
   const { data: response, isLoading } = useGetAllNewsQuery({
     category,
     publisher,
   });
-  const { data: trendingResponse, isLoading: trendingIsLoading } =
-    useGetAllTrendingNewsQuery(category);
-  const articles = response?.articles;
-  const data = Array.isArray(articles)
-    ? [...articles, ...trendingResponse?.articles]
-    : undefined;
-  const article =
-    !isLoading &&
-    !trendingIsLoading &&
-    data?.find((item: articleType) => item.title === title);
+  const { data: trendingResponse } = useGetAllTrendingNewsQuery(category);
+  const articles = response?.articles
+    ? response?.articles
+    : ([] as articleType[]);
+  const trending = trendingResponse?.articles
+    ? trendingResponse?.articles
+    : ([] as articleType[]);
+  const data = [...articles, ...trending];
+  const article = data.find((item: articleType) => item.title === title);
 
   return (
     <div>
