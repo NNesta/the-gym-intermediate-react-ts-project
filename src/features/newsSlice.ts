@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialsStateType } from "../Type";
+import { initialStateType } from "../Type";
 
-const initialState: initialsStateType = {
+const initialState: initialStateType = {
   category: "all",
   filter: "",
   publisher: "",
