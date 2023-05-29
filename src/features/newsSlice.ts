@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { initialStateType } from "../Type";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { initialStateType, stateType } from "../Type";
 
 const initialState: initialStateType = {
   category: "all",
@@ -12,14 +12,14 @@ export const newsSlice = createSlice({
   initialState,
   name: "news",
   reducers: {
-    changeCategory: (state, action) => {
+    changeCategory: (state: stateType, action: PayloadAction<string>) => {
       state.category = action.payload;
       state.publisher = "";
     },
-    filterNews: (state, action) => {
+    filterNews: (state: stateType, action: PayloadAction<string>) => {
       state.filter = action.payload;
     },
-    setPublisher: (state, action) => {
+    setPublisher: (state: stateType, action: PayloadAction<string>) => {
       state.publisher = action.payload;
       state.category = "all";
       state.showPublishers = false;

@@ -8,7 +8,7 @@ import { sourceType } from "../../Type";
 const Publishers = () => {
   const dispatch = useDispatch();
   const { data: response, isLoading } = useGetAllPublishersQuery({});
-  const data = !isLoading ? response?.sources : [];
+  const data = response?.sources ? response.sources : [];
   const publishers = Array.from(
     new Set(data?.map((source: sourceType) => JSON.stringify(source))),
     (source) => JSON.parse(source)

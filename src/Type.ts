@@ -2,6 +2,9 @@ export type sourceType = {
   name: string;
   id: string;
 };
+export type publisherType = {
+  sources: sourceType[];
+};
 
 export type articleType = {
   author: string;
@@ -28,12 +31,13 @@ export type trendingCardPropsType = CardPropsType & {};
 export type NewsCardPropsType = CardPropsType & {};
 
 export type stateType = {
-  news: {
-    category: string;
-    filter: string;
-    publisher: string;
-    showPublishers: boolean;
-  };
+  category: string;
+  filter: string;
+  publisher: string;
+  showPublishers: boolean;
+};
+export type newsType = {
+  news: stateType;
 };
 
 export type wrapperProps = {

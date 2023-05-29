@@ -8,12 +8,12 @@ import {
   useGetAllTrendingNewsQuery,
 } from "../features/apiSlice";
 import Footer from "../components/layout/Footer";
-import { stateType, articleType } from "../Type";
+import { newsType, articleType } from "../Type";
 
 const DetailPage = () => {
   const params = useParams();
   const title = params.title ? params.title : "";
-  const { category, publisher } = useSelector((state: stateType) => state.news);
+  const { category, publisher } = useSelector((state: newsType) => state.news);
   const { data: response, isLoading } = useGetAllNewsQuery({
     category,
     publisher,

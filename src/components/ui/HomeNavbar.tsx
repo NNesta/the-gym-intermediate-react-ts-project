@@ -5,13 +5,13 @@ import { changeCategory } from "../../features/newsSlice";
 import { MdOutlineArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import useDate from "../../hooks/useDate";
 import { CATEGORIES } from "../../assets/data";
-import { stateType } from "../../Type";
+import { newsType } from "../../Type";
 
 const HomeNavbar = () => {
   const { day, month, date, year } = useDate();
   const ref = useRef<HTMLUListElement | null>(null);
   const dispatch = useDispatch();
-  const { category } = useSelector((state: stateType) => state.news);
+  const { category } = useSelector((state: newsType) => state.news);
   const handleScroll = (position: "left" | "right") => {
     if (ref.current) {
       if (position === "left") ref.current.scrollLeft = 50;

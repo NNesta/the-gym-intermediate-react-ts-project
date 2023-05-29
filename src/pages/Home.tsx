@@ -6,13 +6,13 @@ import Navbar from "../components/layout/Navbar";
 import Loading from "../components/ui/Loading";
 import NewsCard from "../components/ui/NewsCard";
 import HomeNavbar from "../components/ui/HomeNavbar";
-import { articleType, stateType } from "../Type";
+import { articleType, newsType } from "../Type";
 import Footer from "../components/layout/Footer";
 import TrendingSection from "../components/layout/TrendingSection";
 
 const Home = () => {
   const { category, publisher, filter } = useSelector(
-    (state: stateType) => state.news
+    (state: newsType) => state.news
   );
   const dispatch = useDispatch();
   const {

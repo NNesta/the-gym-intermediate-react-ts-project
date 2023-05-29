@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import Publisher from "../ui/Publisher";
-import { stateType } from "../../Type";
+import { newsType } from "../../Type";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const { filter, showPublishers } = useSelector(
-    (state: stateType) => state.news
+    (state: newsType) => state.news
   );
-  const handleMenuClick = () => {
+  const handleMenuClick: () => void = () => {
     dispatch(setShowPublishers());
   };
 
@@ -20,6 +20,13 @@ const Navbar = () => {
     document.body.style.overflow = showPublishers ? "hidden" : "auto";
     return () => (document.body.style.overflow = "scroll");
   }, [showPublishers]);
+
+  const changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatch(filterNews(event.target.value));
+  };
+
   return (
     <div className="w-full bg-[#2E2F41] text-gray-200 py-4 fixed top-0 z-50 inset-x-0  px-4">
       <div className="max-w-[1440px] mx-auto">
@@ -40,7 +47,7 @@ const Navbar = () => {
           </Link>
           <div className="h-[80%] min-w-[30%] rounded-full flex items-center justify-between lg:px-6 px-4 text-gray-200 bg-[#404254] border-blue-500 border-2">
             <input
-              onChange={(event) => dispatch(filterNews(event.target.value))}
+              onChange={changeHandler}
               value={filter}
               type="text"
               placeholder="Search for an article"
