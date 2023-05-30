@@ -11,14 +11,20 @@ export const newsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints: (builder) => ({
     getAllNews: builder.query({
-      query: ({ category, publisher }) =>
+      query: ({
+        category,
+        publisher,
+      }: {
+        category: string;
+        publisher: string;
+      }) =>
         `everything?q=${category}&sources=${
           publisher ? publisher : ""
         }&to=${today.toISOString()}&sortBy=publishedAt&apiKey=${KEY}`,
       transformResponse: (response: dataType): dataType => response,
     }),
     getAllTrendingNews: builder.query({
-      query: (category) =>
+      query: (category: string) =>
         `top-headlines?q=${category}&to=${today.toISOString()}&sortBy=publishedAt&apiKey=${KEY}`,
       transformResponse: (response: dataType): dataType => response,
     }),

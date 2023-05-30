@@ -27,8 +27,8 @@ export type CardPropsType = {
   publisher: string;
   author: string;
 };
-export type trendingCardPropsType = CardPropsType & {};
-export type NewsCardPropsType = CardPropsType & {};
+export type trendingCardPropsType = CardPropsType;
+export type NewsCardPropsType = CardPropsType;
 
 export type stateType = {
   category: string;

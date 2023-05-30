@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCategory } from "../../features/newsSlice";
 import { MdOutlineArrowBackIos, MdArrowForwardIos } from "react-icons/md";
@@ -10,6 +10,7 @@ import { newsType } from "../../Type";
 const HomeNavbar = () => {
   const { day, month, date, year } = useDate();
   const ref = useRef<HTMLUListElement | null>(null);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { category } = useSelector((state: newsType) => state.news);
   const handleScroll = (position: "left" | "right") => {
@@ -18,18 +19,11 @@ const HomeNavbar = () => {
       if (position === "right") ref.current.scrollLeft += 60;
     }
   };
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleClick = (value: string) => {
+    dispatch(changeCategory(value));
+    navigate("/");
+  };
 
-  useEffect(() => {
-    const element = ref.current;
-    function handleScroll() {
-      const element = ref.current;
-      if (element?.scrollLeft) setScrollPosition(element?.scrollLeft);
-    }
-
-    element?.addEventListener("scroll", handleScroll);
-    return () => element?.removeEventListener("scroll", handleScroll);
-  }, []);
   return (
     <div className="w-full  flex items-center md:divide-x-2 divide-gray-400 justify-between md:border-b-2 border-gray-300 ">
       <div className="hidden md:block">
@@ -45,9 +39,7 @@ const HomeNavbar = () => {
         >
           <MdOutlineArrowBackIos
             size={30}
-            className={`material-symbols-outlined   rounded-full p-2 ${
-              scrollPosition < 420 && "opacity-30"
-            } bg-white`}
+            className={`material-symbols-outlined   rounded-full p-2 bg-white`}
           />
         </button>
         <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl xl:max-w-3xl mx-auto">
@@ -63,14 +55,9 @@ const HomeNavbar = () => {
                 } `}
                 key={categoryObject.id}
               >
-                <Link
-                  to="/"
-                  onClick={() => {
-                    dispatch(changeCategory(categoryObject.value));
-                  }}
-                >
+                <button onClick={() => handleClick(categoryObject.value)}>
                   {categoryObject.name}
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
@@ -81,9 +68,7 @@ const HomeNavbar = () => {
         >
           <MdArrowForwardIos
             size={30}
-            className={`material-symbols-outlined rounded-full p-2 bg-white ${
-              scrollPosition > 420 && "opacity-30"
-            }`}
+            className={`material-symbols-outlined rounded-full p-2 bg-white`}
           />
         </button>
       </div>
