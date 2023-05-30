@@ -15,7 +15,8 @@ export type articleType = {
   title: string;
   url: string;
   urlToImage: string;
-} & { source: sourceType };
+  source: sourceType;
+};
 export type dataType = {
   articles: articleType[];
   totalResults: number;
@@ -44,11 +45,4 @@ export type wrapperProps = {
   children: React.ReactNode;
   styles: string;
 };
-export type initialStateType = {
-  category: string;
-  filter: string;
-  publisher: string;
-  showPublishers: boolean;
-};
-
-export type EffectCallback = () => void | (() => void | undefined);
+export type initialStateType = stateType;
