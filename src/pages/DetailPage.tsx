@@ -19,12 +19,8 @@ const DetailPage = () => {
     publisher,
   });
   const { data: trendingResponse } = useGetAllTrendingNewsQuery(category);
-  const articles = response?.articles
-    ? response?.articles
-    : ([] as articleType[]);
-  const trending = trendingResponse?.articles
-    ? trendingResponse?.articles
-    : ([] as articleType[]);
+  const articles = response?.articles ? response?.articles : [];
+  const trending = trendingResponse?.articles ? trendingResponse?.articles : [];
   const data = [...articles, ...trending];
   const article = data.find((item: articleType) => item.title === title);
 

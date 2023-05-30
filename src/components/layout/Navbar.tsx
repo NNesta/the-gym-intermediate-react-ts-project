@@ -31,7 +31,7 @@ const Navbar = () => {
     <div className="w-full bg-[#2E2F41] text-gray-200 py-4 fixed top-0 z-50 inset-x-0  px-4">
       <div className="max-w-[1440px] mx-auto">
         {showPublishers && (
-          <div className="absolute inset-0  -z-30">
+          <div className="absolute inset-0 -z-30">
             <Publisher />
           </div>
         )}
